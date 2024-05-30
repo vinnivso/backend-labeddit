@@ -1,4 +1,3 @@
--- Active: 1684435276100@@127.0.0.1@3306
 
 CREATE TABLE
     users (
