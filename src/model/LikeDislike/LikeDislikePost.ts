@@ -1,13 +1,4 @@
-export interface LikeDislikePostDB {
-  id_user: string;
-  id_post: string;
-  like: number | null;
-}
-
-export interface LikeOrDislikePost {
-  idUser: string;
-  like: number | null;
-}
+import { LikeOrDislikePost } from "./LikeDislikePostInterface";
 
 export class LikeDislikePost {
   constructor(
