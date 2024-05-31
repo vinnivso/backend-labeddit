@@ -24,7 +24,7 @@ export class CommentRepository extends BaseRepository {
     return result;
   }
 
-  public editComment = async (comment: CommentDB, id: string): Promise <any> => {
+  public updateComment = async (comment: CommentDB, id: string): Promise <any> => {
     await BaseRepository
       .connection(CommentRepository.COMMENTPOST_TABLE)
       .update(comment)
