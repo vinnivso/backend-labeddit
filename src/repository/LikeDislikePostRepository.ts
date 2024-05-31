@@ -4,7 +4,7 @@ import { BaseRepository } from "./BaseRepository";
 export class LikeDislikePostRepository extends BaseRepository {
   private static LIKESDISLIKES_TABLE = "like_dislike";
 
-  public newLikeOrDislikePost = async (likeDislike: LikeOrDislikePostDB): Promise<void> => {
+  public newLikeDislikePost = async (likeDislike: LikeOrDislikePostDB): Promise<void> => {
     await BaseRepository
       .connection(LikeDislikePostRepository.LIKESDISLIKES_TABLE)
       .insert(likeDislike);
