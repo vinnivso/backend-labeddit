@@ -1,9 +1,14 @@
 import z from "zod";
+import { CommentModel } from "../../model/Comment/CommentInterface";
 
 export interface CreateCommentInputDTO {
   token: string;
   content: string;
   idPost: string;
+}
+
+export interface CreateCommentOutputDTO {
+  message: string;
 }
 
 export const CreateCommentScheme = z

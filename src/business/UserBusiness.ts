@@ -10,7 +10,7 @@ import { TokenManager } from "../services/TokenManager";
 
 export class UserBusiness {
   constructor(
-    private repository: UserRepository,
+    private userRepository: UserRepository,
     private idGenerator: IdGerator,
     private hashManager: HashManager,
     private tokenManager: TokenManager
@@ -19,7 +19,7 @@ export class UserBusiness {
   //#region signup
   public signup = async (input: SignupInputDTO): Promise<SignupOutputDTO> => {
     const { name, email, password } = input;
-    const userDB = await this.repository.findUserByEmail(email);
+    const userDB = await this.userRepository.findUserByEmail(email);
     if (userDB) {
       throw new BadRequestError("E-mail already exists");
     }
@@ -36,7 +36,7 @@ export class UserBusiness {
       new Date().toISOString()
     );
     const newUserDB = newUser.toDBModel();
-    await this.repository.createUser(newUserDB);
+    await this.userRepository.createUser(newUserDB);
 
     const tokenPayload = newUser.toUserPayloadModel();
     const token = this.tokenManager.createToken(tokenPayload);
@@ -54,7 +54,7 @@ export class UserBusiness {
   //#region login
   public login = async (input: LoginInputDTO): Promise<LoginOutputDTO> => {
     const { email, password } = input;
-    const [userDB] = await this.repository.findUserByEmail(email);
+    const [userDB] = await this.userRepository.findUserByEmail(email);
     if (!userDB) {
       throw new NotFoundError("E-mail not found");
     }

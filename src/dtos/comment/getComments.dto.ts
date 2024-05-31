@@ -8,7 +8,7 @@ export interface GetCommentInputDTO {
 
 export interface GetCommentOutputDTO {
   message: string;
-  products: CommentModel;
+  comment: CommentModel;
 }
 
 export const GetCommentSchema = z

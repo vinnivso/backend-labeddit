@@ -76,7 +76,7 @@ export class Comment {
     this.updatedAt = newUpdateAt;
   }
 
-  public CommentToDB(): CommentDB {
+  public toDBModel(): CommentDB {
     return {
       id: this.id,
       id_user: this.creator.id,
