@@ -7,7 +7,7 @@ export abstract class BaseRepository {
   protected static connection = knex({
     client: "sqlite3",
     connection: {
-      filename: process.env.DB_FILE_PATH as string
+      filename: process.env.DB_FILE_PATH as string,
     },
     useNullAsDefault: true,
     pool: {

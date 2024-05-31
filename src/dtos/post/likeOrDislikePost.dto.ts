@@ -1,16 +1,14 @@
 import z from "zod";
 
-export interface CreateCommentInputDTO {
+export interface LikeOrDislikePostInputDTO {
   postId: string;
   token: string;
-  content: string;
+  like: boolean;
 }
 
-export type CreateCommentOutputDTO = {
-  message: string;
-};
+export type LikeOrDislikePostOutputDTO = undefined;
 
-export const CreateCommentSchema = z
+export const LikeOrDislikePostSchema = z
   .object({
     postId: z
       .string({
@@ -24,11 +22,8 @@ export const CreateCommentSchema = z
         invalid_type_error: "'token' deve ser do tipo string",
       })
       .min(1, "'token' deve possuir no mínimo 1 caractere"),
-    content: z
-      .string({
-        required_error: "'content' é obrigatória",
-        invalid_type_error: "'content' deve ser do tipo string",
-      })
-      .min(1, "'content' deve possuir no mínimo 1 caractere"),
+    like: z.boolean().refine((value) => typeof value === "boolean", {
+      message: "'like' deve ser um valor booleano",
+    }),
   })
-  .transform((data) => data as CreateCommentInputDTO);
+  .transform((data) => data as LikeOrDislikePostInputDTO);

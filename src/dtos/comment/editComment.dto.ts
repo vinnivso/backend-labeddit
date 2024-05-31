@@ -1,18 +1,18 @@
 import z from "zod";
 
-export interface CreateCommentInputDTO {
-  postId: string;
+export interface EditCommentInputDTO {
+  idToEdit: string;
   token: string;
   content: string;
 }
 
-export type CreateCommentOutputDTO = {
+export type EditCommentOutputDTO = {
   message: string;
-};
+}
 
-export const CreateCommentSchema = z
+export const EditCommentSchema = z
   .object({
-    postId: z
+    idToEdit: z
       .string({
         required_error: "'id' é obrigatória",
         invalid_type_error: "'id' deve ser do tipo string",
@@ -31,4 +31,4 @@ export const CreateCommentSchema = z
       })
       .min(1, "'content' deve possuir no mínimo 1 caractere"),
   })
-  .transform((data) => data as CreateCommentInputDTO);
+  .transform((data) => data as EditCommentInputDTO);

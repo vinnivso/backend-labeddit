@@ -1,40 +1,56 @@
-import { UserDB } from "../model/User/UserInterface";
+import { UserDB } from "../model/User";
 import { BaseRepository } from "./BaseRepository";
 
 export class UserRepository extends BaseRepository {
-  private static USERS_TABLE = "users";
+  public static TABLE_USERS = "users";
 
-  public createUser = async (user: UserDB): Promise <void> => {
-    await BaseRepository
-      .connection(UserRepository.USERS_TABLE)
-      .insert(user);
+  public async insertUser(newUserDB: UserDB): Promise<void> {
+    await BaseRepository.connection(UserRepository.TABLE_USERS).insert(newUserDB);
   }
 
-  public findUserById = async (id: string): Promise <UserDB[]> => {
-    const result: UserDB[] = await BaseRepository
-      .connection(UserRepository.USERS_TABLE)
-      .where({ id });
-    return result;
+  public async findUserByEmail(email: string): Promise<UserDB | undefined> {
+    const [userDB]: UserDB[] | undefined[] = await BaseRepository.connection(
+      UserRepository.TABLE_USERS
+    ).where({ email });
+    return userDB;
   }
 
-  public findUserByEmail = async (email: string): Promise <UserDB[]> => {
-    const result: UserDB[] = await BaseRepository
-      .connection(UserRepository.USERS_TABLE)
-      .where({ email });
-    return result;
+  public async findUserByNickname(
+    nickname: string
+  ): Promise<UserDB | undefined> {
+    const [userDB]: UserDB[] | undefined[] = await BaseRepository.connection(
+      UserRepository.TABLE_USERS
+    ).where({ nickname });
+    return userDB;
   }
 
-  public updateUser = async (user: UserDB, id: string): Promise <void> => {
-    await BaseRepository
-      .connection(UserRepository.USERS_TABLE)
-      .update(user)
-      .where({ id });
+  public async findUserById(id: string): Promise<UserDB | undefined> {
+    const [userDB]: UserDB[] | undefined[] = await BaseRepository.connection(
+      UserRepository.TABLE_USERS
+    ).where({ id });
+    return userDB;
   }
 
-  public deleteUser = async (id: string): Promise <void> => {
-    await BaseRepository
-      .connection(UserRepository.USERS_TABLE)
-      .del()
-      .where({ id });
+  public async findUsers(q: string | undefined): Promise<UserDB[]> {
+    let usersDB;
+    if (q) {
+      const result: UserDB[] = await BaseRepository.connection(
+        UserRepository.TABLE_USERS
+      ).where("email", "LIKE", `${q}`);
+
+      usersDB = result;
+    } else {
+      const result: UserDB[] = await BaseRepository.connection(
+        UserRepository.TABLE_USERS
+      );
+      usersDB = result;
+    }
+    return usersDB;
   }
+
+  public updateUser = async (userDB: UserDB): Promise<void> => {
+    await BaseRepository.connection(UserRepository.TABLE_USERS)
+      .update(userDB)
+      .where({ id: userDB.id });
+  };
 }

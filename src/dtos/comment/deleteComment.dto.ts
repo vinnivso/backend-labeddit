@@ -1,18 +1,17 @@
 import z from "zod";
 
-export interface CreateCommentInputDTO {
-  postId: string;
+export interface DeleteCommentInputDTO {
+  idToDelete: string;
   token: string;
-  content: string;
 }
 
-export type CreateCommentOutputDTO = {
+export type DeleteCommentOutputDTO = {
   message: string;
-};
+}
 
-export const CreateCommentSchema = z
+export const DeleteCommentSchema = z
   .object({
-    postId: z
+    idToDelete: z
       .string({
         required_error: "'id' é obrigatória",
         invalid_type_error: "'id' deve ser do tipo string",
@@ -24,11 +23,5 @@ export const CreateCommentSchema = z
         invalid_type_error: "'token' deve ser do tipo string",
       })
       .min(1, "'token' deve possuir no mínimo 1 caractere"),
-    content: z
-      .string({
-        required_error: "'content' é obrigatória",
-        invalid_type_error: "'content' deve ser do tipo string",
-      })
-      .min(1, "'content' deve possuir no mínimo 1 caractere"),
   })
-  .transform((data) => data as CreateCommentInputDTO);
+  .transform((data) => data as DeleteCommentInputDTO);
