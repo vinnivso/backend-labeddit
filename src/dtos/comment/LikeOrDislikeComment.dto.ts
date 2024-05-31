@@ -1,6 +1,6 @@
 import z from "zod";
 
-export interface likeOrDislikeCommentInputDTO {
+export interface LikeOrDislikeCommentInputDTO {
   token: string;
   id: string;
   like: boolean;
@@ -12,4 +12,4 @@ export const likeOrDislikeCommentScheme = z
     id: z.string().min(1, "'id' must be at least 1 character."),
     like: z.boolean(),
   })
-  .transform((data) => data as likeOrDislikeCommentInputDTO);
+  .transform((data) => data as LikeOrDislikeCommentInputDTO);

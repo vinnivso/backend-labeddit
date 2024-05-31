@@ -1,7 +1,7 @@
 import { BadRequestError } from "../customErrors/BadRequestError";
 import { NotFoundError } from "../customErrors/NotFoundError";
-import { loginOutputDTO } from "../dtos/user/login.dto";
-import { signupInputDTO, signupOutputDTO } from "../dtos/user/signup.dto";
+import { LoginInputDTO, LoginOutputDTO } from "../dtos/user/login.dto";
+import { SignupInputDTO, SignupOutputDTO } from "../dtos/user/signup.dto";
 import { User, USER_ROLES } from "../model/User/User";
 import { UserRepository } from "../repository/UserRepository";
 import { HashManager } from "../services/HashManager";
@@ -17,7 +17,7 @@ export class UserBusiness {
   ) { }
 
   //#region signup
-  public signup = async (input: signupInputDTO): Promise<signupOutputDTO> => {
+  public signup = async (input: SignupInputDTO): Promise<SignupOutputDTO> => {
     const { name, email, password } = input;
     const userDB = await this.repository.findUserByEmail(email);
     if (userDB) {
@@ -41,7 +41,7 @@ export class UserBusiness {
     const tokenPayload = newUser.toUserPayloadModel();
     const token = this.tokenManager.createToken(tokenPayload);
 
-    const response: signupOutputDTO = {
+    const response: SignupOutputDTO = {
       message: "User created successfully",
       token
     };
@@ -52,7 +52,7 @@ export class UserBusiness {
   //#endregion signup
 
   //#region login
-  public login = async (input: signupInputDTO): Promise<loginOutputDTO> => {
+  public login = async (input: LoginInputDTO): Promise<LoginOutputDTO> => {
     const { email, password } = input;
     const [userDB] = await this.repository.findUserByEmail(email);
     if (!userDB) {
@@ -77,7 +77,7 @@ export class UserBusiness {
     const tokenPayload = user.toUserPayloadModel();
     const token = this.tokenManager.createToken(tokenPayload);
 
-    const response:loginOutputDTO = {
+    const response:LoginOutputDTO = {
       message: "Login successfully",
       token
     };

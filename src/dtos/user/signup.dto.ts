@@ -1,12 +1,12 @@
 import z from "zod";
 
-export interface signupInputDTO {
+export interface SignupInputDTO {
   name: string;
   email: string;
   password: string;
 }
 
-export interface signupOutputDTO {
+export interface SignupOutputDTO {
   message: string;
   token: string;
 }

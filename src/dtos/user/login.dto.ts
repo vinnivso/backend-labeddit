@@ -1,11 +1,11 @@
 import z from "zod";
 
-export interface loginInputDTO {
+export interface LoginInputDTO {
   email: string;
   password: string;
 }
 
-export interface loginOutputDTO {
+export interface LoginOutputDTO {
   message: string;
   token: string;
 }
