@@ -35,7 +35,7 @@ export class UserBusiness {
       throw new ConflictError("'email' já existe!");
     }
 
-    const id = this.idGenerator.gerate();
+    const id = this.idGenerator.generate();
     const hashedPassword = await this.hashManager.hash(password);
 
     const date = new Date();

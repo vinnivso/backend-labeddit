@@ -36,7 +36,7 @@ export class PostBusiness {
       throw new ConflictError("Já existe um 'post' com esse conteúdo!");
     }
 
-    const id = this.idGenerator.gerate();
+    const id = this.idGenerator.generate();
 
     const date = new Date();
     const year = date.getFullYear();
