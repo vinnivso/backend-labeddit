@@ -1,8 +1,8 @@
 import jwt from "jsonwebtoken";
-import dotev from "dotenv";
-import { TokenPayload } from "../model/User/UserInterface";
+import dotenv from "dotenv";
+import { TokenPayload } from "../model/User";
 
-dotev.config();
+dotenv.config();
 
 export class TokenManager {
   public createToken = (payload: TokenPayload): string => {
@@ -15,7 +15,6 @@ export class TokenManager {
   public getPayload = (token: string): TokenPayload | null => {
     try {
       const payload = jwt.verify(token, process.env.JWT_KEY as string);
-
       return payload as TokenPayload;
     } catch (error) {
       return null;

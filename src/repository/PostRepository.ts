@@ -11,7 +11,7 @@ export class PostRepository extends BaseRepository {
   public static TABLE_POSTS = "posts";
   public static TABLE_LIKES_DISLIKES_POSTS = "likes_dislikes_posts";
 
-  public insertPost = async (postDB: PostDB): Promise<void> => {
+  public createPost = async (postDB: PostDB): Promise<void> => {
     await BaseRepository.connection(PostRepository.TABLE_POSTS).insert(postDB);
   };
 

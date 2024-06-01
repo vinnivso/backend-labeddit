@@ -1,16 +1,16 @@
 import z from "zod";
 
-export interface EditPostInputDTO {
+export interface UpdatePostInputDTO {
   idToEdit: string;
   token: string;
   content: string;
 }
 
-export type EditPostOutputDTO = {
+export type UpdatePostOutputDTO = {
   message: string;
 }
 
-export const EditPostSchema = z
+export const UpdatePostSchema = z
   .object({
     idToEdit: z
       .string({
@@ -31,4 +31,4 @@ export const EditPostSchema = z
       })
       .min(1, "'content' deve possuir no mínimo 1 caractere"),
   })
-  .transform((data) => data as EditPostInputDTO);
+  .transform((data) => data as UpdatePostInputDTO);

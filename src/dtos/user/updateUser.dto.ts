@@ -1,6 +1,6 @@
 import z from "zod";
 
-export interface EditUserInputDTO {
+export interface UpdateUserInputDTO {
   idToEdit: string;
   token: string;
   nickname: string;
@@ -9,11 +9,11 @@ export interface EditUserInputDTO {
   avatar: string;
 }
 
-export interface EditUserOutputDTO {
+export interface UpdateUserOutputDTO {
   message: string;
 }
 
-export const EditUserSchema = z
+export const UpdateUserSchema = z
   .object({
     idToEdit: z
       .string({
@@ -28,7 +28,7 @@ export const EditUserSchema = z
       })
       .min(1, "'token' deve possuir no mínimo 1 caractere"),
     nickname: z
-      .string({        
+      .string({
         invalid_type_error: "'nickname' deve ser do tipo string",
       })
       .regex(
@@ -59,4 +59,4 @@ export const EditUserSchema = z
       , "'avatar' deve ser um link válido.")
       .optional(),
   })
-  .transform((data) => data as EditUserInputDTO);
+  .transform((data) => data as UpdateUserInputDTO);

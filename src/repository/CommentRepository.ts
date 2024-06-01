@@ -23,7 +23,7 @@ export class CommentRepository extends BaseRepository {
     return result as PostDB | undefined;
   };
 
-  public insertComment = async (commentDB: CommentDB): Promise<void> => {
+  public createComment = async (commentDB: CommentDB): Promise<void> => {
     await BaseRepository.connection(CommentRepository.TABLE_COMMENTS).insert(
       commentDB
     );

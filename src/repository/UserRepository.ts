@@ -4,7 +4,7 @@ import { BaseRepository } from "./BaseRepository";
 export class UserRepository extends BaseRepository {
   public static TABLE_USERS = "users";
 
-  public async insertUser(newUserDB: UserDB): Promise<void> {
+  public async createUser(newUserDB: UserDB): Promise<void> {
     await BaseRepository.connection(UserRepository.TABLE_USERS).insert(newUserDB);
   }
 
@@ -31,12 +31,12 @@ export class UserRepository extends BaseRepository {
     return userDB;
   }
 
-  public async findUsers(q: string | undefined): Promise<UserDB[]> {
+  public async findUsers(email: string | undefined): Promise<UserDB[]> {
     let usersDB;
-    if (q) {
+    if (email) {
       const result: UserDB[] = await BaseRepository.connection(
         UserRepository.TABLE_USERS
-      ).where("email", "LIKE", `${q}`);
+      ).where("email", "LIKE", `${email}`);
 
       usersDB = result;
     } else {
